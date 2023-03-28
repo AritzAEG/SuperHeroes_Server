@@ -16,13 +16,45 @@ const getAllWorkouts = async (req, res) => {
   }
 };
 
+const getOneWorkout = async (req, res) => {
+  const {params: {workoutId }} = req;
+
+  if (!workoutId) {
+    return res
+    .status(400)
+    .send({
+      status: "FAILED",
+      data: { error: "Parameter ':workoutId' can not be empty"},
+    });
+  }
+
+  try {
+    const workout = await workoutService.getOneWorkout(workoutId);
+    if (!workout) {
+      return res
+      .status(400)
+      .send({
+        status: "FAILED",
+        data: { error: `Can´t find workout with the id '${workoutId}'`} });
+      }
+
+      res.send({ status: "OK", data: workout});
+  
+    } catch (error) {
+      res.status(error?.status || 500)
+      .send({ status: "FAILED",
+      message: "Error al realizar la peticion:",
+    data: { error: error?.message || error} });
+    }
+};
+
 const createNewWorkout = async (req, res) => {
   const {body} = req;
   if (
-    !body.Nombre ||
-    !body.Velocidad ||
-    !body.Latitude ||
-    !body.Longitude
+    !body.id ||
+    !body.nombre ||
+    !body.descripcion ||
+    !body.img
   ) {
     res
       .status(400)
@@ -54,4 +86,73 @@ const createNewWorkout = async (req, res) => {
   }
 };
 
-module.exports = {getAllWorkouts, createNewWorkout}
+const updateOneWorkout = async (req, res) => {
+  const {
+    body,
+    params: {workoutId},
+  } = req;
+
+  if (!workoutId) {
+    return res
+    .status(400)
+    .send({
+      status: "FAILED",
+      data: { error: "Parameter ':workoutId' can not be empty" },
+    });
+  }
+
+  try {
+    const updatedWorkout = await workoutService.updateOneWorkout(workoutId, body);
+    if (!updatedWorkout) {
+      return res
+      .status(404)
+      .send({
+        status: "FAILED",
+        data: { error: `Can´t find workout with the id '${workoutId}'`} });
+      }
+
+      res.send({ status: "OK", data: updatedWorkout});
+  
+    } catch (error) {
+      res
+      .status(error?.status || 500)
+      .send({ status: "FAILED",
+      message: "Error al realizar la peticion:",
+      data: { error: error?.message || error} });
+    }
+  };
+
+  const deleteOneWorkout = async (req, res) => {
+  const { params: {workoutId} } = req;
+
+  if (!workoutId) {
+    return res
+    .status(400)
+    .send({
+      status: "FAILED",
+      data: { error: "Parameter ':workoutId' can not be empty" },
+    });
+  }
+
+  try {
+    const deletedWorkout = await workoutService.deleteOneWorkout(workoutId);
+    if (!deletedWorkout) {
+      return res
+      .status(404)
+      .send({
+        status: "FAILED",
+        data: { error: `Can´t find workout with the id '${workoutId}'`} });
+      }
+
+      res.status(200).send({ status: "OK", data: deletedWorkout});
+  
+    } catch (error) {
+      res
+      .status(error?.status || 500)
+      .send({ status: "FAILED",
+      message: "Error al realizar la peticion:",
+      data: { error: error?.message || error} });
+    }
+  };
+
+module.exports = {getAllWorkouts, getOneWorkout, createNewWorkout, updateOneWorkout, deleteOneWorkout}

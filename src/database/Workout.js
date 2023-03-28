@@ -12,6 +12,18 @@ const getAllWorkouts = async () => {
   }
 };
 
+const getOneWorkout = async (workoutId) => {
+  try
+  {
+    const workout = await Workout.findById(workoutId);
+    return workout;
+  }
+  catch (error)
+  {
+    throw error;
+  }
+};
+
 const createNewWorkout = async (newWorkout) => {
   try
   {
@@ -25,4 +37,30 @@ const createNewWorkout = async (newWorkout) => {
   }
 };
 
-module.exports = { getAllWorkouts, createNewWorkout};
+const updateOneWorkout = async (workoutId, changes) => {
+  try
+  {
+    let updatedWorkout = await Workout.findByIdAndUpdate(workoutId,
+    {$set:changes},{new:true});
+    return updatedWorkout;
+  }
+  catch (error)
+  {
+    throw error;
+  }
+}
+
+const deleteOneWorkout = async (workoutId) => {
+  try
+  {
+    let deletedWorkout = await Workout.findByIdAndRemove(workoutId);
+    return deletedWorkout;
+  }
+  catch (error)
+  {
+    throw error;
+  }
+}
+
+
+module.exports = { getAllWorkouts, getOneWorkout, createNewWorkout, updateOneWorkout, deleteOneWorkout};

@@ -5,8 +5,8 @@ const { Schema } = mongoose;
 const workoutSchema = new Schema({
   id: Number,
   nombre: String,
-  Descripcion: String,
-  Foto: String
+  descripcion: String,
+  img: String
 });
 
 module.exports = mongoose.model('Workout', workoutSchema);
