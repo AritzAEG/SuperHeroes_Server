@@ -1,13 +1,10 @@
-# fly.toml file generated for superheroes on 2023-03-28T21:16:11+02:00
+# fly.toml file generated for superheroes on 2023-04-02T14:17:18+02:00
 
 app = "superheroes"
 kill_signal = "SIGINT"
 kill_timeout = 5
 primary_region = "mad"
 processes = []
-
-[build]
-  builder = "heroku/buildpacks:20"
 
 [env]
   PORT = "8080"
