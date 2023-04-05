@@ -1,3 +1,4 @@
+const cors = require('./cors.js');
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -9,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
-
+app.use(cors);
 app.use("/superHeroes/workouts", workoutRouter);
 
 async function start() {

@@ -1,4 +1,4 @@
-# fly.toml file generated for superheroes on 2023-04-02T14:17:18+02:00
+# fly.toml file generated for superheroes on 2023-04-04T20:00:04+02:00
 
 app = "superheroes"
 kill_signal = "SIGINT"
