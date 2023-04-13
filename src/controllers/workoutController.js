@@ -68,10 +68,10 @@ const createNewWorkout = async (req, res) => {
   }
 
   const newWorkout = {
-    Nombre: body.Nombre,
-    Velocidad: body.Velocidad,
-    Latitude: body.Latitude,
-    Longitude: body.Longitude
+    id: body.id,
+    nombre: body.nombre,
+    descripcion: body.descripcion,
+    img: body.img
   };
 
   try {
