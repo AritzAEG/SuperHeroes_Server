@@ -15,7 +15,7 @@ const getAllWorkouts = async () => {
 const getOneWorkout = async (workoutId) => {
   try
   {
-    const workout = await Workout.findById(workoutId);
+    const workout = Workout.findById(workoutId);
     return workout;
   }
   catch (error)

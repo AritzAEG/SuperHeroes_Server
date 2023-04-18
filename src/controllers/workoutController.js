@@ -17,7 +17,7 @@ const getAllWorkouts = async (req, res) => {
 };
 
 const getOneWorkout = async (req, res) => {
-  const {params: {workoutId }} = req;
+  const {params: { workoutId }} = req;
 
   if (!workoutId) {
     return res
@@ -41,10 +41,11 @@ const getOneWorkout = async (req, res) => {
       res.send({ status: "OK", data: workout});
   
     } catch (error) {
-      res.status(error?.status || 500)
+      res
+      .status(error?.status || 500)
       .send({ status: "FAILED",
-      message: "Error al realizar la peticion:",
-    data: { error: error?.message || error} });
+              message: "Error al realizar la peticion:",
+              data: { error: error?.message || error} });
     }
 };
 
