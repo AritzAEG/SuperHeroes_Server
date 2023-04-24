@@ -4,14 +4,14 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const mongodbRoute = "mongodb+srv://test_user:test_user@cluster0.4fsrg4p.mongodb.net/?retryWrites=true&w=majority";
 
-const workoutRouter = require("./routes/workoutRoutes")
+const heroeRouter = require("./routes/heroeRoutes")
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(cors);
-app.use("/superHeroes/workouts", workoutRouter);
+app.use("/superHeroes/heroes", heroeRouter);
 
 async function start() {
   try

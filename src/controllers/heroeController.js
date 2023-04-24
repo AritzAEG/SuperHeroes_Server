@@ -1,12 +1,12 @@
-const workoutService = require("../services/workoutService");
+const heroeService = require("../services/heroeService");
 
-const getAllWorkouts = async (req, res) => {
+const getAllHeroes = async (req, res) => {
   try {
-    const allWorkouts = await workoutService.getAllWorkouts();
-    if (allWorkouts.length === 0) {
-      return res.status(404).send({message: "No existen workouts"});
+    const allHeroes = await heroeService.getAllHeroes();
+    if (allHeroes.length === 0) {
+      return res.status(404).send({message: "No existen heroes"});
     }
-    res.send({ status: "OK", data: allWorkouts});
+    res.send({ status: "OK", data: allHeroes});
   } catch (error) {
     res 
       .status(error?.status || 500)
@@ -16,29 +16,29 @@ const getAllWorkouts = async (req, res) => {
   }
 };
 
-const getOneWorkout = async (req, res) => {
-  const {params: { workoutId }} = req;
+const getOneHeroe = async (req, res) => {
+  const {params: { heroeId }} = req;
 
-  if (!workoutId) {
+  if (!heroeId) {
     return res
     .status(400)
     .send({
       status: "FAILED",
-      data: { error: "Parameter ':workoutId' can not be empty"},
+      data: { error: "Parameter ':heroeId' can not be empty"},
     });
   }
 
   try {
-    const workout = await workoutService.getOneWorkout(workoutId);
-    if (!workout) {
+    const heroe = await heroeService.getOneHeroe(heroeId);
+    if (!heroe) {
       return res
       .status(400)
       .send({
         status: "FAILED",
-        data: { error: `Can´t find workout with the id '${workoutId}'`} });
+        data: { error: `Can´t find heroe with the id '${heroeId}'`} });
       }
 
-      res.send({ status: "OK", data: workout});
+      res.send({ status: "OK", data: heroe});
   
     } catch (error) {
       res
@@ -49,7 +49,7 @@ const getOneWorkout = async (req, res) => {
     }
 };
 
-const createNewWorkout = async (req, res) => {
+const createNewHeroe = async (req, res) => {
   const {body} = req;
   if (
     !body.id ||
@@ -68,7 +68,7 @@ const createNewWorkout = async (req, res) => {
     return;
   }
 
-  const newWorkout = {
+  const newHeroe = {
     id: body.id,
     nombre: body.nombre,
     descripcion: body.descripcion,
@@ -76,8 +76,8 @@ const createNewWorkout = async (req, res) => {
   };
 
   try {
-    const createdWorkout = await workoutService.createNewWorkout(newWorkout);
-    res.status(201).send({status: "OK", data: createdWorkout});
+    const createdHeroe = await heroeService.createNewHeroe(newHeroe);
+    res.status(201).send({status: "OK", data: createdHeroe});
   } catch (error) {
     res
       .status(error?.status || 500)
@@ -87,32 +87,32 @@ const createNewWorkout = async (req, res) => {
   }
 };
 
-const updateOneWorkout = async (req, res) => {
+const updateOneHeroe = async (req, res) => {
   const {
     body,
-    params: {workoutId},
+    params: {heroeId},
   } = req;
 
-  if (!workoutId) {
+  if (!heroeId) {
     return res
     .status(400)
     .send({
       status: "FAILED",
-      data: { error: "Parameter ':workoutId' can not be empty" },
+      data: { error: "Parameter ':heroeId' can not be empty" },
     });
   }
 
   try {
-    const updatedWorkout = await workoutService.updateOneWorkout(workoutId, body);
-    if (!updatedWorkout) {
+    const updatedHeroe = await heroeService.updateOneHeroe(heroeId, body);
+    if (!updatedHeroe) {
       return res
       .status(404)
       .send({
         status: "FAILED",
-        data: { error: `Can´t find workout with the id '${workoutId}'`} });
+        data: { error: `Can´t find heroe with the id '${heroeId}'`} });
       }
 
-      res.send({ status: "OK", data: updatedWorkout});
+      res.send({ status: "OK", data: updatedHeroe});
   
     } catch (error) {
       res
@@ -123,29 +123,29 @@ const updateOneWorkout = async (req, res) => {
     }
   };
 
-  const deleteOneWorkout = async (req, res) => {
-  const { params: {workoutId} } = req;
+  const deleteOneHeroe = async (req, res) => {
+  const { params: {heroeId} } = req;
 
-  if (!workoutId) {
+  if (!heroeId) {
     return res
     .status(400)
     .send({
       status: "FAILED",
-      data: { error: "Parameter ':workoutId' can not be empty" },
+      data: { error: "Parameter ':heroeId' can not be empty" },
     });
   }
 
   try {
-    const deletedWorkout = await workoutService.deleteOneWorkout(workoutId);
-    if (!deletedWorkout) {
+    const deletedHeroe = await heroeService.deleteOneHeroe(heroeId);
+    if (!deletedHeroe) {
       return res
       .status(404)
       .send({
         status: "FAILED",
-        data: { error: `Can´t find workout with the id '${workoutId}'`} });
+        data: { error: `Can´t find heroe with the id '${heroeId}'`} });
       }
 
-      res.status(200).send({ status: "OK", data: deletedWorkout});
+      res.status(200).send({ status: "OK", data: deletedHeroe});
   
     } catch (error) {
       res
@@ -156,4 +156,4 @@ const updateOneWorkout = async (req, res) => {
     }
   };
 
-module.exports = {getAllWorkouts, getOneWorkout, createNewWorkout, updateOneWorkout, deleteOneWorkout}
+module.exports = {getAllHeroes, getOneHeroe, createNewHeroe, updateOneHeroe, deleteOneHeroe}

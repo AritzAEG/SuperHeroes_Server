@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const workoutSchema = new Schema({
-  id: Number,
+const heroeSchema = new Schema({
+  id: String,
   nombre: String,
   descripcion: String,
   img: String
 });
 
-module.exports = mongoose.model('Workout', workoutSchema);
+module.exports = mongoose.model('Heroe', heroeSchema);
