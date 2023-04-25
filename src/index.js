@@ -7,7 +7,7 @@ const mongodbRoute = "mongodb+srv://test_user:test_user@cluster0.4fsrg4p.mongodb
 const heroeRouter = require("./routes/heroeRoutes")
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 app.use(bodyParser.json());
 app.use(cors);

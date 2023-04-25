@@ -52,7 +52,6 @@ const getOneHeroe = async (req, res) => {
 const createNewHeroe = async (req, res) => {
   const {body} = req;
   if (
-    !body.id ||
     !body.nombre ||
     !body.descripcion ||
     !body.img
@@ -69,7 +68,6 @@ const createNewHeroe = async (req, res) => {
   }
 
   const newHeroe = {
-    id: body.id,
     nombre: body.nombre,
     descripcion: body.descripcion,
     img: body.img
