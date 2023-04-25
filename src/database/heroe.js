@@ -63,4 +63,4 @@ const deleteOneHeroe = async (heroeId) => {
 }
 
 
-module.exports = { getAllHeroes, getOneHeroe, createNewHeroe, updateOneHeroe, deleteOneHeroe};
+module.exports = {getAllHeroes, getOneHeroe, createNewHeroe, updateOneHeroe, deleteOneHeroe};
