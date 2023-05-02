@@ -40,7 +40,7 @@ const createNewHeroe = async (newHeroe) => {
 const updateOneHeroe = async (heroeId, changes) => {
   try
   {
-    let updatedHeroe = await heroe.findByIdAndUpdate(heroeId,
+    let updatedHeroe = await Heroe.findByIdAndUpdate(heroeId,
     {$set:changes},{new:true});
     return updatedHeroe;
   }
@@ -53,7 +53,7 @@ const updateOneHeroe = async (heroeId, changes) => {
 const deleteOneHeroe = async (heroeId) => {
   try
   {
-    let deletedHeroe = await heroe.findByIdAndRemove(heroeId);
+    let deletedHeroe = await Heroe.findByIdAndRemove(heroeId);
     return deletedHeroe;
   }
   catch (error)
