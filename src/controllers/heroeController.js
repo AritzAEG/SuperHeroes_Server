@@ -54,7 +54,13 @@ const createNewHeroe = async (req, res) => {
   if (
     !body.nombre ||
     !body.descripcion ||
-    !body.img
+    !body.img ||
+    !body.int ||
+    !body.str ||
+    !body.dur ||
+    !body.spe ||
+    !body.pow ||
+    !body.com 
   ) {
     res
       .status(400)
